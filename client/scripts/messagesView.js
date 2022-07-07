@@ -6,16 +6,17 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    // TODO: Perform any work which needs to be done
-    // when this view loads.
   },
 
   render: function() {
-    // TODO: Render _all_ the messages.
+    for (var key in Messages._data) {
+      MessagesView.renderMessage(Messages._data[key]);
+    }
   },
 
   renderMessage: function(message) {
-    // TODO: Render a single message.
+    this.$chats.append(MessageView.render(message));
+
   },
 
   handleClick: function(event) {

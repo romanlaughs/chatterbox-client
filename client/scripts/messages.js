@@ -3,33 +3,25 @@
 // with and manipulate the data.
 var Messages = {
 
-  _data: {},
+  storage: {},
 
-  update: function() {
-
+  add: function(message) {
+    Messages.storage[message['message_id']] = message;
   },
 
-  addData: function(data, cb) {
-    for (var i = 0; i < data.length; i++) {
-      if (Messages._data[data[i].message_id] === undefined) {
-        Messages._data[data[i].message_id] = data[i];
-      }
+  update: function(arrayData, cb) {
+    for (var i = 0; i < arrayData.length; i++) {
+      Messages.add(arrayData[i]);
     }
-    cb();
+
+    cb(Object.values(Messages.storage));
   },
+
+  conform: function(message) {
+    message.text = message.text || '';
+    message.username = message.username || '';
+    message.roomname = message.roomname || '';
+    return message;
+  }
 };
 
-//Messages.prototype.addData = function(dataArray)
-// Messages.prototype.storage = {};
-
-// Messages.prototype.data = {};
-
-// Messages.prototype.addData = function(dataArray) {
-//   for (var i = 0; i < dataArray.length; i++) {
-//     if (this.storage[i] === undefined) {
-//       this.storage[i] = {};
-//       this.storage[i].text = dataArray[i].text;
-//     }
-//   }
-//   return this.storage;
-// };

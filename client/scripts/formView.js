@@ -11,8 +11,20 @@ var FormView = {
   },
 
   handleSubmit: function(event) {
+
     event.preventDefault();
-    console.log('click!');
+
+    var message = {
+      username: App.username,
+      roomname: Rooms.selected || 'lobby',
+      text: FormView.$form.find('#message').val(),
+    };
+
+    Parse.create(message, (data) => {
+      Object.assign(message, data);
+      Messages.update(message, MessagesView.render);
+    });
+
   },
 
   setStatus: function(active) {

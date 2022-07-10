@@ -7,16 +7,21 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function() {
-    // TODO: Perform any work which needs to be done
-    // when this view loads.
+    RoomsView.$button.on(
+      'click',
+      RoomsView.handleClick
+    );
   },
 
   render: function() {
-    // TODO: Render out the list of rooms.
+    for (var room in Rooms._data) {
+      RoomsView.renderRoom(room);
+    }
   },
 
   renderRoom: function(roomname) {
-    // TODO: Render out a single room.
+    var roomnameTwo = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.prepend(roomnameTwo);
   },
 
   handleChange: function(event) {
@@ -24,7 +29,7 @@ var RoomsView = {
   },
 
   handleClick: function(event) {
-    // TODO: Handle the user clicking the "Add Room" button.
-  }
+    console.log(event);
+  },
 
 };

@@ -15,7 +15,6 @@ var Friends = {
   },
 
   toggleStatus: function(name, callback = () => {}) {
-    //console.log(Friends.isFriend(name));
     if (Friends.isFriend(name)) {
       Friends._data.delete(name);
       callback(false);
@@ -23,7 +22,6 @@ var Friends = {
       Friends._data.add(name);
       callback(true);
     }
-    //console.log(Friends._data);
   },
 
   // TODO: Define methods which allow you to add, toggle,

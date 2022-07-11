@@ -25,9 +25,9 @@ var Rooms = {
     return roomname === Rooms.selected;
   },
 
-  addRoom: function(roomname, callback = () => {}) {
+  add: function(roomname, callback = () => {}) {
     Rooms._data.add(roomname);
-    Rooms.selected = room;
+    Rooms.selected = roomname;
     callback(Rooms.items());
   },
 

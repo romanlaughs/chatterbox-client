@@ -19,12 +19,17 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
-    setInterval(App.fetch, 3000);
+    setInterval(App.fetch, 2000);
+
   },
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
-      Messages.update(data, MessagesView.render);
+      if (Rooms.selected === 'lobby') {
+        Messages.update(data, MessagesView.render);
+      } else {
+        Messages.update(data, MessagesView.roomRender, Rooms.selected);
+      }
       Rooms.update(data, RoomsView.render);
       callback();
     });

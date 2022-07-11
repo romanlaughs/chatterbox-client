@@ -12,10 +12,21 @@ var MessagesView = {
       MessagesView.handleClick);
   },
 
-  render: function(valueArray) {
+  render: function() {
     MessagesView.$chats.html('');
+    var valueArray = Object.values(Messages.storage);
     for (var i = 0; i < valueArray.length; i++) {
       MessagesView.renderMessage(valueArray[i]);
+    }
+  },
+
+  roomRender: function(room) {
+    MessagesView.$chats.html('');
+    var valueArray = Object.values(Messages.storage);
+    for (var i = 0; i < valueArray.length; i++) {
+      if (valueArray[i].roomname === room) {
+        MessagesView.renderMessage(valueArray[i]);
+      }
     }
   },
 

@@ -98,19 +98,6 @@ describe('chatterbox', function() {
       Friends.toggleStatus.restore();
     });
 
-    it('should add a room when clicking add', function() {
-      sinon.spy(Rooms, 'add');
-      var prompt = window.prompt;
-      window.prompt = sinon.stub().returns('testroom');
-
-      App.initialize();
-      $('#rooms').find('button').trigger('click');
-      expect(Rooms.add.called).to.be.true;
-
-      window.prompt = prompt;
-      Rooms.add.restore();
-    });
-
     it('should try to send a message upon clicking submit', function() {
       sinon.spy(Parse, 'create');
 

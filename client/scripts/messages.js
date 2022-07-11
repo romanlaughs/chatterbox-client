@@ -9,12 +9,15 @@ var Messages = {
     Messages.storage[message['message_id']] = message;
   },
 
-  update: function(arrayData, cb) {
+  update: function(arrayData, cb, room) {
     for (var i = 0; i < arrayData.length; i++) {
       Messages.add(arrayData[i]);
     }
-
-    cb(Object.values(Messages.storage));
+    if (room) {
+      cb(room);
+    } else {
+      cb();
+    }
   },
 
   conform: function(message) {

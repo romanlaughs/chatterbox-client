@@ -7,29 +7,36 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function() {
-    RoomsView.$button.on(
-      'click',
-      RoomsView.handleClick
-    );
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$button.on('click', RoomsView.handleClick);
   },
 
   render: function() {
-    for (var room in Rooms._data) {
-      RoomsView.renderRoom(room);
-    }
+    RoomsView.$select.html('');
+    Rooms.items().forEach(RoomsView.renderRoom);
+    RoomsView.$select.val(Rooms.selected);
   },
 
   renderRoom: function(roomname) {
-    var roomnameTwo = $('<option>').val(roomname).text(roomname);
-    RoomsView.$select.prepend(roomnameTwo);
+    var $option = $('<option>') .val(roomname) .text(roomname);
+    RoomsView.$select.append($option);
+
   },
 
   handleChange: function(event) {
-    // TODO: Handle a user selecting a different room.
+    Rooms.selected = RoomsView.$select.val();
+    console.log(Rooms.selected);
+    MessagesView.roomRender(Rooms.selected);
   },
 
   handleClick: function(event) {
-    console.log(event);
+    var newRoom = prompt('What Room Would You Like to Add?');
+    if (newRoom) {
+      Rooms.add(newRoom, () => {
+        RoomsView.render();
+        MessagesView.render();
+      });
+    }
   },
 
 };
